@@ -4,7 +4,9 @@ version = "1.0.0"
 authors = ["Ojos Project"]
 edition = "2021"
 description = "A CLI tool to help create frontend-related tasks."
-repository = "https://github.com/ojosproject/frontend-cli"
+repository = "https://github.com/ojosproject/cli/"
+homepage = "https://github.com/ojosproject/cli/"
+readme = "./README.md"
 license = "GPL-3.0-only"
 
 
