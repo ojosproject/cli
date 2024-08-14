@@ -46,9 +46,9 @@ pub fn create_page(page_name: Option<String>, dir: String, y: bool) {
         println!("\nWARNING: Will create these files.");
         let extensions = [".tsx", ".module.css"];
         for extension in extensions {
-            println!("{:?}", path.join(format!("{name}/page{extension}")));
+            println!("- {:?}", path.join(format!("{name}/page{extension}")));
         }
-        println!("{:?}", path.join(format!("{name}/components/")));
+        println!("- {:?}", path.join(format!("{name}/components/")));
     
         let yes_no = input("\n\nDoes this look right? (y/N)");
     
