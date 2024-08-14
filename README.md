@@ -54,6 +54,12 @@ Create a page, skipping user input. (Assume yes)
 ojos frontend --filename page_name -y
 ```
 
+Create these files in a specific directory.
+
+```shell
+ojos frontend --dir src/app/recording
+```
+
 ## Support
 
 If you need help with the program, please run any of the following commands:
