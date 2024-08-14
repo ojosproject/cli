@@ -11,7 +11,8 @@ pub struct Cli {
 #[derive(Debug, Subcommand)]
 pub enum Team {
     /// Tools for the Frontend team
-    Frontend(FrontendCommand)
+    Frontend(FrontendCommand),
+    Trust(TrustCommand)
 }
 
 #[derive(Debug, Args)]
@@ -27,4 +28,16 @@ pub struct FrontendCommand{
     /// Assume yes, skips the verification
     #[arg(short, action)]
     pub y: bool
+}
+
+/// T(ypeScript)Rust converter. Convert Rust structs to TypeScript types!
+#[derive(Debug, Args)]
+pub struct TrustCommand {
+    /// Where the input is located.
+    #[arg(short, long, default_value_t=String::from("src-tauri/src/structs.rs"))]
+    pub input: String,
+
+    /// Where to dump the output.
+    #[arg(short, long, default_value_t=String::from("src/types.ts"))]
+    pub output: String
 }
