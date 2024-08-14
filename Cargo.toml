@@ -1,5 +1,5 @@
 [package]
-name = "frontend-cli"
+name = "ojos"
 version = "0.1.0"
 authors = ["Ojos Project"]
 edition = "2021"
