@@ -14,7 +14,7 @@ fn main() {
 
     match cli.team {
         Team::Frontend(frontend) => {
-            create_page(frontend.filename, frontend.dir, frontend.y)
+            create_page(frontend.name, frontend.dir, frontend.y)
         },
     }
 }

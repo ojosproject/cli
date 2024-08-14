@@ -18,23 +18,23 @@ fn create_files(path: PathBuf, name: &String) {
     fs::write(path.join(format!("{}/page.module.css", name)), "/*\npage.module.css\nOjos Project\n\nEnter a description of this page here!\n*/\n").expect("Failed to write .module.css file.");
 }
 
-pub fn create_page(filename: Option<String>, dir: String, y: bool) {
+pub fn create_page(page_name: Option<String>, dir: String, y: bool) {
     let mut path = env::current_dir().expect("Current directory could not be found.");
     let name: String;
     
     if dir == "src/app/" {
         path = path.join(dir);
 
-        match filename {
+        match page_name {
             Some(f) => {name = f},
-            None => {name = input("Set a name for the file:")}
+            None => {name = input("Set a name for the page:")}
         }
         
     } else {
         // dir was specified
         path = path.join(dir);
 
-        match filename {
+        match page_name {
             Some(f) => {name = f},
             None => {name = ".".to_string()}
         }

@@ -2,7 +2,7 @@ use clap::{Args, Parser, Subcommand};
 
 
 #[derive(Parser, Debug)]
-#[clap(version, about)]
+#[clap(name = "ojos", version, about)]
 pub struct Cli {
     #[clap(subcommand)]
     pub team: Team
@@ -16,9 +16,9 @@ pub enum Team {
 
 #[derive(Debug, Args)]
 pub struct FrontendCommand{
-    /// A file name, to skip the input portion
+    /// A page name, to skip the input portion
     #[arg(short, long)]
-    pub filename: Option<String>,
+    pub name: Option<String>,
 
     /// Choose where to generate files
     #[arg(short, long, default_value_t=String::from("src/app/"))]
