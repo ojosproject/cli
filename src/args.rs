@@ -20,7 +20,7 @@ pub struct FrontendCommand{
     #[arg(short, long)]
     pub filename: Option<String>,
 
-    /// Nested mode, will create files in the current directory instead of app/src/
+    /// Choose where to generate files
     #[arg(short, long, default_value_t=String::from("src/app/"))]
     pub dir: String,
 
