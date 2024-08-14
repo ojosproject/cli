@@ -21,8 +21,8 @@ pub struct FrontendCommand{
     pub filename: Option<String>,
 
     /// Nested mode, will create files in the current directory instead of app/src/
-    #[arg(long, action)]
-    pub nested: bool,
+    #[arg(short, long, default_value_t=String::from("src/app/"))]
+    pub dir: String,
 
     /// Assume yes, skips the verification
     #[arg(short, action)]
