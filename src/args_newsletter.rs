@@ -1,4 +1,5 @@
 use clap::{Args, Subcommand};
+use crate::tools::get_home;
 
 #[derive(Debug, Args)]
 pub struct NewsletterCommand {
@@ -18,7 +19,7 @@ pub enum NewsletterSubcommand {
 #[derive(Debug, Args)]
 pub struct Config {
     /// Where to save the `Newsletter` folder
-    #[arg(short, long, default_value_t=String::from(std::env::var("HOME").unwrap()))]
+    #[arg(short, long, default_value_t=String::from(get_home()))]
     pub path: String,
 
     /// Domain of the email

@@ -1,5 +1,5 @@
 use std::{env, fs, path::{Path, PathBuf}};
-use crate::tools::input;
+use crate::tools::{input, get_home};
 use reqwest;
 
 /// Ensure that the directory is a proper `newsletter` directory.
@@ -96,7 +96,7 @@ pub fn setup(path: String, email: Option<String>, domain: Option<String>, api_ke
 }
 
 fn load_envs() {
-    let env_path = Path::new(env::var("HOME").unwrap().as_str()).join("Newsletter/.env");
+    let env_path = Path::new(get_home().as_str()).join("Newsletter/.env");
     let c = fs::read_to_string(env_path).unwrap();
 
     for line in c.split("\n") {
@@ -111,7 +111,7 @@ fn load_envs() {
 }
 
 fn show_config() {
-    let env_path = Path::new(env::var("HOME").unwrap().as_str()).join("Newsletter/.env");
+    let env_path = Path::new(get_home().as_str()).join("Newsletter/.env");
     let c = fs::read_to_string(&env_path).unwrap();
     println!();
 
@@ -154,7 +154,7 @@ pub fn batch_send(for_newsletter: String) {
     let email: String;
     let domain: String;
     let api_key: String;
-    let newsletter = Path::new(env::var("HOME").unwrap().as_str()).join("Newsletter/");
+    let newsletter = Path::new(get_home().as_str()).join("Newsletter/");
 
 
     match env::var("EMAIL") {
