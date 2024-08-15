@@ -25,7 +25,7 @@ A CLI tool for Ojos Project development.
 
 ## Visuals
 
-![Using the Ojos CLI visual](.github/assets/visual.png)
+![Ojos CLI visual running `ojos --help`](.github/assets/visual.png)
 
 ## Installation
 
