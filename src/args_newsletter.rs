@@ -8,7 +8,10 @@ pub struct NewsletterCommand {
 
 #[derive(Debug, Subcommand)]
 pub enum NewsletterSubcommand {
+    /// Manage your configuration to interact with the Mailgun API.
     Config(Config),
+
+    /// Publish to the newsletter.
     Publish(Publish)
 }
 

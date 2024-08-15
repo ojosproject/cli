@@ -12,9 +12,9 @@ pub struct Cli {
 
 #[derive(Debug, Subcommand)]
 pub enum CategoryType {
-    /// Tools for the frontend team
+    /// Creates necessary `.tsx`, `.module.css`, and `/components/` files for a new frontend page.
     Frontend(FrontendCommand),
 
-    /// Tools to interact with the Mailgun API
+    /// Manages the configuration and publication of our email newsletter.
     Newsletter(NewsletterCommand)
 }
