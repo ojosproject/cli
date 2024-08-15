@@ -8,7 +8,7 @@ repository = "https://github.com/ojosproject/cli/"
 homepage = "https://github.com/ojosproject/cli/"
 readme = "./README.md"
 license = "GPL-3.0-only"
-exclude = [".github", ".vscode"]
+exclude = [".github", ".vscode", "docs"]
 
 
 [dependencies]
