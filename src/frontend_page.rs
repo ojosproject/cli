@@ -1,13 +1,5 @@
-use std::{env, fs, io::stdin, path::PathBuf};
-
-fn input(message: &str) -> String {
-    let mut input = String::new();
-
-    println!("{}", message);
-    stdin().read_line(&mut input).expect("Failed to read input.");
-
-    String::from(input.trim())
-}
+use std::{env, fs, path::PathBuf};
+use crate::tools::input;
 
 fn create_files(path: PathBuf, name: &String) {
     // components/

@@ -1,30 +1,20 @@
-use clap::{Args, Parser, Subcommand};
+use clap::{Parser, Subcommand};
+use crate::args_frontend_page::FrontendCommand;
+use crate::args_newsletter::NewsletterCommand;
 
 
 #[derive(Parser, Debug)]
 #[clap(name = "ojos", version, about)]
 pub struct Cli {
     #[clap(subcommand)]
-    pub team: Team
+    pub category: CategoryType
 }
 
 #[derive(Debug, Subcommand)]
-pub enum Team {
-    /// Tools for the Frontend team
-    Frontend(FrontendCommand)
-}
+pub enum CategoryType {
+    /// Tools for the frontend team
+    Frontend(FrontendCommand),
 
-#[derive(Debug, Args)]
-pub struct FrontendCommand{
-    /// A page name, to skip the input portion
-    #[arg(short, long)]
-    pub name: Option<String>,
-
-    /// Choose where to generate files
-    #[arg(short, long, default_value_t=String::from("src/app/"))]
-    pub dir: String,
-
-    /// Assume yes, skips the verification
-    #[arg(short, action)]
-    pub y: bool
+    /// Tools to interact with the Mailgun API
+    Newsletter(NewsletterCommand)
 }
