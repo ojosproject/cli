@@ -18,12 +18,15 @@ You can set all of these by running the following command:
 ojos newsletter config -d mail.ojosproject.org -e "Ojos Project <newsletter@mail.ojosproject.org>" -a <YOUR API KEY>
 ```
 
+> [!IMPORTANT]
+> Replace `<YOUR API KEY>` with an actual API key provided by Carlos.
+
 That commend will do a few things. First, it'll create a new `Newsletter/`
 folder inside of your home folder. Inside of that folder, a `mail/`
 folder and a `.env` file. Inside of the `mail/` folder, you will find two text
 files: `content_en.txt` and `content_es.txt`.
 
-> [!CRITICAL]
+> [!CAUTION]
 > The content inside of `.env` includes information that should be **SECRET**.
 > NEVER share the content of this folder.
 
