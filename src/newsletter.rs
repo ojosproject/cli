@@ -146,7 +146,7 @@ fn cleanup(content: &String) -> Vec<String> {
         }
     }
 
-    vec![subject, content_to_send]
+    vec![subject, content_to_send.trim().to_string()]
 }
 
 pub fn batch_send(for_newsletter: String) {
