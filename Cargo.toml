@@ -1,6 +1,6 @@
 [package]
 name = "ojos"
-version = "1.2.1"
+version = "1.2.2"
 authors = ["Ojos Project"]
 edition = "2021"
 description = "A CLI tool to help create frontend-related tasks."
