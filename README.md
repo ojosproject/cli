@@ -21,6 +21,7 @@ A CLI tool for Ojos Project development.
 ### Features
 
 - Create a new page for frontend development
+- Manage the configuration and publishing of our email newsletter
 
 ## Visuals
 
@@ -36,36 +37,15 @@ cargo install --git https://github.com/ojosproject/cli --branch release
 
 ## Usage
 
-Create a new page for frontend development.
-
-```shell
-ojos frontend
-```
-
-Create a page, but skip the naming portion.
-
-```shell
-ojos frontend --filename page_name
-```
-
-Create a page, skipping user input. (Assume yes)
-
-```shell
-ojos frontend --filename page_name -y
-```
-
-Create these files in a specific directory.
-
-```shell
-ojos frontend --dir src/app/recording
-```
+You can read the full API documentation in the [`api.md` file](./docs/api.md).
 
 ## Support
 
 If you need help with the program, please run any of the following commands:
 
-- `ojos`
+- `ojos --help`
 - `ojos frontend --help`
+- `ojos newsletter --help`
 
 ## License
 
