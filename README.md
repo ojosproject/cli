@@ -28,11 +28,10 @@ A CLI tool for Ojos Project development.
 
 ## Installation
 
-The Ojos CLI is available on [crates.io](https://crates.io/crates/ojos).
-You can install it by using:
+You can install the Ojos CLI by running this command:
 
 ```shell
-cargo install ojos
+cargo install --git https://github.com/ojosproject/cli --branch release
 ```
 
 ## Usage
