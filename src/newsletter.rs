@@ -4,8 +4,7 @@ use reqwest;
 
 /// Ensure that the directory is a proper `newsletter` directory.
 pub fn is_valid_dir(path: &PathBuf) -> bool {
-    let mut mail_exists = false;
-    let mut history_exists = false;
+    let mut content_exists = false;
     let mut env_exists = false;
 
     if path.exists() {
@@ -15,15 +14,13 @@ pub fn is_valid_dir(path: &PathBuf) -> bool {
             if unwrapped_item.contains(".env") {
                 env_exists = true;
             }
-            else if unwrapped_item.contains("history") {
-                history_exists = true;
-            } else if unwrapped_item.contains("mail") {
-                mail_exists = true;
+            else if unwrapped_item.contains("content.txt") {
+                content_exists = true;
             }
         }
     }
 
-    mail_exists && history_exists && env_exists
+    content_exists && env_exists
 }
 
 pub fn setup(path: String, email: Option<String>, domain: Option<String>, api_key: Option<String>, show: bool) {
@@ -37,12 +34,9 @@ pub fn setup(path: String, email: Option<String>, domain: Option<String>, api_ke
     if !is_valid_dir(&newsletter_path) {
         println!("Valid `Newsletter` folder was not found in home directory. Creating...");
         fs::create_dir_all(&newsletter_path).unwrap();
-        fs::create_dir_all(&newsletter_path.join("mail")).unwrap();
-        fs::create_dir_all(&newsletter_path.join("history")).unwrap();
 
         fs::write(&newsletter_path.join(".env"), "").unwrap();
-        fs::write(&newsletter_path.join("mail/content_en.txt"), "# Use this file to write the content of your email.\n# \n# Note: Lines that start with `#` are skipped.\n# \n# If you need any help, contact Carlos Valdez.\n# Have fun!\nSUBJECT=!!! INSERT TITLE HERE !!!\n").unwrap();
-        fs::write(&newsletter_path.join("mail/content_es.txt"), "# Same thing as `content_en.txt`, except this should be translated.\nSUBJECT=!!! INSERT TITLE HERE !!!\n").unwrap();
+        fs::write(&newsletter_path.join("content.txt"), "# Use this file to write the content of your email.\n# \n# Note: Lines that start with `#` are skipped.\n# \n# If you need any help, contact Carlos Valdez.\n# Have fun!\nSUBJECT=!!! INSERT TITLE HERE !!!\n").unwrap();
     } else {
         println!("Valid `Newsletter` folder found!");
     }
@@ -191,7 +185,7 @@ pub fn batch_send(for_newsletter: String) {
 
     if yes_no.eq_ignore_ascii_case("y") {
         // actual sending happens here
-        let subject_content = cleanup(&fs::read_to_string(newsletter.join("mail/content_en.txt")).unwrap());
+        let subject_content = cleanup(&fs::read_to_string(newsletter.join("content.txt")).unwrap());
 
         println!("CONFIRMATION");
         println!("You're about to batch send an email. Here is the content you're about to send:\n");
