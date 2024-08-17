@@ -8,24 +8,18 @@ pub fn is_valid_dir(path: &PathBuf) -> bool {
     let mut history_exists = false;
     let mut env_exists = false;
 
-    match path.read_dir() {
-        Ok(items) => {
-            for item in items {
-                let unwrapped_item = item.unwrap().file_name().into_string().unwrap();
-        
-                if unwrapped_item.contains(".env") {
-                    env_exists = true;
-                }
-                else if unwrapped_item.contains("history") {
-                    history_exists = true;
-                } else if unwrapped_item.contains("mail") {
-                    mail_exists = true;
-                }
+    if path.exists() {
+        for item in path.read_dir().unwrap() {
+            let unwrapped_item = item.unwrap().file_name().into_string().unwrap();
+    
+            if unwrapped_item.contains(".env") {
+                env_exists = true;
             }
-        },
-        Err(error_message) => {
-            println!("{}", error_message);
-            return false
+            else if unwrapped_item.contains("history") {
+                history_exists = true;
+            } else if unwrapped_item.contains("mail") {
+                mail_exists = true;
+            }
         }
     }
 
