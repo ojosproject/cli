@@ -112,6 +112,12 @@ fn load_envs() {
 
 fn show_config() {
     let env_path = Path::new(get_home().as_str()).join("Newsletter/.env");
+
+    if !env_path.exists() {
+        println!("Could not find a `.env` file in {:?}. Did you run the setup?\n\nSuggestion: Run `ojos newsletter config`", env_path);
+        return;
+    }
+
     let c = fs::read_to_string(&env_path).unwrap();
     println!();
 
