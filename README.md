@@ -16,7 +16,8 @@
 
 ## Description
 
-A CLI tool for Ojos Project development.
+The Ojos CLI is a tool meant to help members of the Ojos Project at the
+University of California, Irvine.
 
 ### Features
 
