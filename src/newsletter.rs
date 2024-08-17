@@ -159,17 +159,26 @@ pub fn batch_send(for_newsletter: String) {
 
     match env::var("EMAIL") {
         Ok(e) => {email = e;}
-        Err(_) => {panic!("EMAIL environment variable was not found. Set it with `ojos newsletter config --email Name<email@example.com>`");},
+        Err(_) => {
+            println!("Error: EMAIL environment variable was not found. Set it with `ojos newsletter config --email <Name <email@example.com>>`");
+            std::process::exit(1);
+        },
     }
 
     match env::var("DOMAIN") {
         Ok(d) => {domain = d}
-        Err(_) => {panic!("DOMAIN environment variable was not found. Set it with `ojos newsletter config --domain DOMAIN`")}
+        Err(_) => {
+            println!("Error: DOMAIN environment variable was not found. Set it with `ojos newsletter config --domain <DOMAIN>`");
+            std::process::exit(1);
+        }
     }
 
     match env::var("API_KEY") {
         Ok(a) => {api_key = a},
-        Err(_) => panic!("API_KEY environment variable was not found. Set it with `ojos newsletter config --api_key API_KEY")
+        Err(_) => {
+            println!("Error: API_KEY environment variable was not found. Set it with `ojos newsletter config --api_key <API_KEY>");
+            std::process::exit(1);
+        }
     }
 
     println!("\nRunning with these settings...\n");
