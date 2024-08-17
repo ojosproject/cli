@@ -1,6 +1,6 @@
 [package]
 name = "ojos"
-version = "1.2.6"
+version = "1.2.7"
 authors = ["Ojos Project"]
 edition = "2021"
 description = "CLI tool to help members of the Ojos Project at the University of California, Irvine."
