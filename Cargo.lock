@@ -614,7 +614,7 @@ dependencies = [
 
 [[package]]
 name = "ojos"
-version = "1.2.5"
+version = "1.2.6"
 dependencies = [
  "clap",
  "reqwest",
