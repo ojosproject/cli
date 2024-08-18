@@ -22,9 +22,8 @@ ojos newsletter config -d mail.ojosproject.org -e "Ojos Project <newsletter@mail
 > Replace `<YOUR API KEY>` with an actual API key provided by Carlos.
 
 That commend will do a few things. First, it'll create a new `Newsletter/`
-folder inside of your home folder. Inside of that folder, a `mail/`
-folder and a `.env` file. Inside of the `mail/` folder, you will find two text
-files: `content_en.txt` and `content_es.txt`.
+folder inside of your home folder. Inside of that folder, you will find a `.env`
+file and a `content.txt` file.
 
 > [!CAUTION]
 > The content inside of `.env` includes information that should be **SECRET**.
@@ -51,8 +50,8 @@ Congrats, you're ready to write an email!
 ## Writing an email
 
 As explained in the last section, a new folder called `Newsletter` was created
-in your home folder. Inside of that folder, there's a `mail` folder. Go inside
-and you will find a `content_en.txt` file. Write your full email in that file!
+in your home folder. Inside of that folder, there's a `content.txt` file. Write
+your full email in that file!
 
 When you're ready to publish (ensure to add a sender signature!), you need to
 choose which newsletter you're sending to:
@@ -63,7 +62,7 @@ choose which newsletter you're sending to:
 Then you run this command:
 
 ```shell
-ojos newsletter publish <chosen newsletter>
+ojos newsletter publish <CHOSEN NEWSLETTER>
 ```
 
 You will be asked questions, such as confirmation of settings and previewing
