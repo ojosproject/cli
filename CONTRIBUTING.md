@@ -90,7 +90,7 @@ The `mod.rs` file is only around to let `main.rs` know the other files inside of
 your feature folder exists. For example, the `mod.rs` file inside of the
 `newsletter` folder is:
 
-```shell
+```rust
 pub mod main;
 pub mod args;
 ```
