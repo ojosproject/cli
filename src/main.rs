@@ -2,7 +2,7 @@
 // Ojos Project
 // 
 // Creates a new page for the frontend developers.
-mod tools;
+mod utils;
 mod args;
 mod frontend;
 mod newsletter;

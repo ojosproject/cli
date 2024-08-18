@@ -1,5 +1,5 @@
 use clap::{Args, Subcommand};
-use crate::tools::get_home;
+use crate::utils::get_home;
 
 #[derive(Debug, Args)]
 pub struct NewsletterCommand {

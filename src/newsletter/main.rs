@@ -1,5 +1,5 @@
 use std::{env, fs, path::{Path, PathBuf}};
-use crate::tools::{input, get_home};
+use crate::utils::{input, get_home};
 use reqwest;
 
 /// Ensure that the directory is a proper `newsletter` directory.

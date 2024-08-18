@@ -1,5 +1,5 @@
 use std::{env, fs, path::PathBuf};
-use crate::tools::input;
+use crate::utils::input;
 
 fn create_files(path: PathBuf, name: &String) {
     // components/
