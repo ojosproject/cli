@@ -16,7 +16,7 @@
   - [Adding a new subcommand](#adding-a-new-subcommand)
     - [`feature/mod.rs`](#featuremodrs)
     - [`feature/args.rs`](#featureargsrs)
-    - [`feature/utils.rs`](#featureutilsrs)
+    - [`feature/main.rs`](#featuremainrs)
     - [`src/args.rs`](#srcargsrs)
     - [`src/main.rs`](#srcmainrs)
 
@@ -81,7 +81,7 @@ cargo publish
 If you want to build a new subcommand, please create a new folder inside of the
 `src` folder. Each folder is for a subcommand, such as `frontend` and
 `newsletter`. Inside of each folder, there are three files. `args.rs`,
-`utils.rs`, and `mod.rs`. They're the bare minimum, though you can create more
+`main.rs`, and `mod.rs`. They're the bare minimum, though you can create more
 if needed.
 
 ### `feature/mod.rs`
@@ -91,7 +91,7 @@ your feature folder exists. For example, the `mod.rs` file inside of the
 `newsletter` folder is:
 
 ```shell
-pub mod utils;
+pub mod main;
 pub mod args;
 ```
 
@@ -106,11 +106,11 @@ clap.
 [This video helped me figure this out quickly](https://www.youtube.com/watch?v=fD9ptABVQbI).
 I can't really explain it better than that video.
 
-### `feature/utils.rs`
+### `feature/main.rs`
 
-`utils.rs` can be considered the "`main.rs`" file of your feature folder. I
-made a bunch of functions and threw them in there for the various different
-things I need to implement the feature.
+The `main.rs` file inside of a feature folder is, well, the main file. I made a
+bunch of functions and threw them in there for the various different things I
+need to implement the feature.
 
 ### `src/args.rs`
 
@@ -123,4 +123,4 @@ add it.
 Finally, you can add your feature to the `main.rs` file by using `match`
 statements. It's fairly easy to figure out, as you just need to match the
 category, then the subcommand, and finally implement your resources in
-`feature/utils.rs`.
+`feature/main.rs`.
