@@ -1,6 +1,6 @@
 use clap::{Parser, Subcommand};
-use crate::args_frontend_page::FrontendCommand;
-use crate::args_newsletter::NewsletterCommand;
+use crate::frontend::args::FrontendCommand;
+use crate::newsletter::args::NewsletterCommand;
 
 
 #[derive(Parser, Debug)]

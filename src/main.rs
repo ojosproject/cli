@@ -4,26 +4,24 @@
 // Creates a new page for the frontend developers.
 mod tools;
 mod args;
-mod frontend_page;
+mod frontend;
 mod newsletter;
-mod args_frontend_page;
-mod args_newsletter;
-
-use args_newsletter::NewsletterSubcommand;
 use clap::Parser;
 use args::{Cli, CategoryType};
+use newsletter::{main as newsletter_utils, args::NewsletterSubcommand};
+use frontend::main as frontend_utils;
 
 fn main() {
     let cli = Cli::parse();
 
     match cli.category {
         CategoryType::Frontend(frontend) => {
-            frontend_page::create_page(frontend.name, frontend.dir, frontend.y)
+            frontend_utils::create_page(frontend.name, frontend.dir, frontend.y)
         },
         CategoryType::Newsletter(newsletter) => {
             match newsletter.command {
                 NewsletterSubcommand::Config(newsletter_config) => {
-                    newsletter::setup(
+                    newsletter_utils::setup(
                         newsletter_config.path,
                         newsletter_config.email,
                         newsletter_config.domain,
@@ -31,7 +29,7 @@ fn main() {
                         newsletter_config.show);
                 },
                 NewsletterSubcommand::Publish(publish) => {
-                    newsletter::batch_send(publish.newsletter);
+                    newsletter_utils::batch_send(publish.newsletter);
                 }
             }
         }
