@@ -1,7 +1,7 @@
 use clap::Args;
 
 #[derive(Debug, Args)]
-pub struct FrontendCommand{
+pub struct FrontendCommand {
     /// A page name, to skip the input portion
     #[arg(short, long)]
     pub name: Option<String>,
@@ -12,5 +12,5 @@ pub struct FrontendCommand{
 
     /// Assume yes, skips the verification
     #[arg(short, action)]
-    pub y: bool
+    pub y: bool,
 }

@@ -1,10 +1,10 @@
-use clap::{Args, Subcommand};
 use crate::utils::get_home;
+use clap::{Args, Subcommand};
 
 #[derive(Debug, Args)]
 pub struct NewsletterCommand {
     #[clap(subcommand)]
-    pub command: NewsletterSubcommand
+    pub command: NewsletterSubcommand,
 }
 
 #[derive(Debug, Subcommand)]
@@ -13,7 +13,7 @@ pub enum NewsletterSubcommand {
     Config(Config),
 
     /// Publish to the newsletter.
-    Publish(Publish)
+    Publish(Publish),
 }
 
 #[derive(Debug, Args)]
@@ -35,7 +35,7 @@ pub struct Config {
     pub email: Option<String>,
 
     #[arg(short, long)]
-    pub show: bool
+    pub show: bool,
 }
 
 #[derive(Debug, Args)]

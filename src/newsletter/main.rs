@@ -1,6 +1,9 @@
-use std::{env, fs, path::{Path, PathBuf}};
-use crate::utils::{input, get_home};
+use crate::utils::{get_home, input};
 use reqwest;
+use std::{
+    env, fs,
+    path::{Path, PathBuf},
+};
 
 /// Ensure that the directory is a proper `newsletter` directory.
 pub fn is_valid_dir(path: &PathBuf) -> bool {
@@ -10,11 +13,10 @@ pub fn is_valid_dir(path: &PathBuf) -> bool {
     if path.exists() {
         for item in path.read_dir().unwrap() {
             let unwrapped_item = item.unwrap().file_name().into_string().unwrap();
-    
+
             if unwrapped_item.contains(".env") {
                 env_exists = true;
-            }
-            else if unwrapped_item.contains("content.txt") {
+            } else if unwrapped_item.contains("content.txt") {
                 content_exists = true;
             }
         }
@@ -23,7 +25,13 @@ pub fn is_valid_dir(path: &PathBuf) -> bool {
     content_exists && env_exists
 }
 
-pub fn setup(path: String, email: Option<String>, domain: Option<String>, api_key: Option<String>, show: bool) {
+pub fn setup(
+    path: String,
+    email: Option<String>,
+    domain: Option<String>,
+    api_key: Option<String>,
+    show: bool,
+) {
     if show {
         return show_config();
     }
@@ -47,7 +55,7 @@ pub fn setup(path: String, email: Option<String>, domain: Option<String>, api_ke
         Some(e) => {
             println!("Editing email...");
             env_content.push_str(format!("EMAIL={e}\n").as_str());
-        },
+        }
         None => {}
     }
 
@@ -55,7 +63,7 @@ pub fn setup(path: String, email: Option<String>, domain: Option<String>, api_ke
         Some(d) => {
             println!("Editing domain...");
             env_content.push_str(format!("DOMAIN={d}\n").as_str());
-        },
+        }
         None => {}
     }
 
@@ -68,14 +76,11 @@ pub fn setup(path: String, email: Option<String>, domain: Option<String>, api_ke
     }
 
     for line in fs::read_to_string(&env_path).unwrap().split("\n") {
-
         if !env_content.contains("API_KEY") && line.contains("API_KEY") {
             env_content.push_str(format!("{line}\n").as_str());
-        }
-        else if !env_content.contains("DOMAIN") && line.contains("DOMAIN") {
+        } else if !env_content.contains("DOMAIN") && line.contains("DOMAIN") {
             env_content.push_str(format!("{line}\n").as_str());
-        }
-        else if !env_content.contains("EMAIL") && line.contains("EMAIL") {
+        } else if !env_content.contains("EMAIL") && line.contains("EMAIL") {
             env_content.push_str(format!("{line}\n").as_str());
         }
     }
@@ -93,8 +98,6 @@ fn load_envs() {
             let items = line.split("=").collect::<Vec<_>>();
             env::set_var(items[0], items[1]);
         }
-
-        
     }
 }
 
@@ -114,17 +117,19 @@ fn show_config() {
             // https://www.reddit.com/r/rust/comments/thz3g4/comment/i1arbn7/
             let items = line.split("=").collect::<Vec<_>>();
             env::set_var(items[0], items[1]);
-            
+
             if items[0] == "API_KEY" {
                 println!("API_KEY = REDACTED.");
             } else {
-                println!("{}", format!("{key} = {value}", key = items[0], value = items[1]))
+                println!(
+                    "{}",
+                    format!("{key} = {value}", key = items[0], value = items[1])
+                )
             }
         }
     }
 
     println!("\nCheck the full configuration in {:?}.", env_path)
-
 }
 
 fn cleanup(content: &String) -> Vec<String> {
@@ -134,8 +139,7 @@ fn cleanup(content: &String) -> Vec<String> {
     for line in content.split("\n") {
         if !line.starts_with("#") && !line.starts_with("SUBJECT") {
             content_to_send.push_str(format!("{line}\n").as_str())
-        }
-        else if line.starts_with("SUBJECT") {
+        } else if line.starts_with("SUBJECT") {
             subject = line.split("=").collect::<Vec<_>>()[1].to_string();
         }
     }
@@ -150,17 +154,18 @@ pub fn batch_send(for_newsletter: String) {
     let api_key: String;
     let newsletter = Path::new(get_home().as_str()).join("Newsletter/");
 
-
     match env::var("EMAIL") {
-        Ok(e) => {email = e;}
+        Ok(e) => {
+            email = e;
+        }
         Err(_) => {
             println!("Error: EMAIL environment variable was not found. Set it with `ojos newsletter config --email <Name <email@example.com>>`");
             std::process::exit(1);
-        },
+        }
     }
 
     match env::var("DOMAIN") {
-        Ok(d) => {domain = d}
+        Ok(d) => domain = d,
         Err(_) => {
             println!("Error: DOMAIN environment variable was not found. Set it with `ojos newsletter config --domain <DOMAIN>`");
             std::process::exit(1);
@@ -168,7 +173,7 @@ pub fn batch_send(for_newsletter: String) {
     }
 
     match env::var("API_KEY") {
-        Ok(a) => {api_key = a},
+        Ok(a) => api_key = a,
         Err(_) => {
             println!("Error: API_KEY environment variable was not found. Set it with `ojos newsletter config --api_key <API_KEY>");
             std::process::exit(1);
@@ -188,11 +193,17 @@ pub fn batch_send(for_newsletter: String) {
         let subject_content = cleanup(&fs::read_to_string(newsletter.join("content.txt")).unwrap());
 
         println!("CONFIRMATION");
-        println!("You're about to batch send an email. Here is the content you're about to send:\n");
-        println!("--------------------------------------------------------------------------------");
+        println!(
+            "You're about to batch send an email. Here is the content you're about to send:\n"
+        );
+        println!(
+            "--------------------------------------------------------------------------------"
+        );
         println!("SUBJECT: {}", subject_content[0]);
         println!("{}", subject_content[1]);
-        println!("--------------------------------------------------------------------------------");
+        println!(
+            "--------------------------------------------------------------------------------"
+        );
 
         if for_newsletter == "newsletter-testing" {
             println!("\nYou are sending TESTING email.");
@@ -203,27 +214,26 @@ pub fn batch_send(for_newsletter: String) {
         let confirmed = input("Confirm by typing 'SEND EMAIL':");
 
         let form = reqwest::blocking::multipart::Form::new()
-        .text("to", format!("{for_newsletter}@{domain}"))
-        .text("from", email)
-        .text("subject", subject_content[0].clone())
-        .text("text", subject_content[1].clone());
+            .text("to", format!("{for_newsletter}@{domain}"))
+            .text("from", email)
+            .text("subject", subject_content[0].clone())
+            .text("text", subject_content[1].clone());
 
         if confirmed == "SEND EMAIL" {
             let client = reqwest::blocking::Client::new();
-            let res = client.post(format!("https://api.mailgun.net/v3/{domain}/messages"))
-            .basic_auth("api", Some(api_key))
-            .multipart(form)
-            .send().unwrap();
+            let res = client
+                .post(format!("https://api.mailgun.net/v3/{domain}/messages"))
+                .basic_auth("api", Some(api_key))
+                .multipart(form)
+                .send()
+                .unwrap();
 
-        println!("Server responded: {}", res.status());
-        println!("Server body: {}", res.text().unwrap());
-
+            println!("Server responded: {}", res.status());
+            println!("Server body: {}", res.text().unwrap());
         } else {
             println!("Operation cancelled.");
         }
-
     } else {
         println!("Abandoning...");
     }
-
 }

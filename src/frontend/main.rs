@@ -1,34 +1,42 @@
-use std::{env, fs, path::PathBuf};
 use crate::utils::input;
+use std::{env, fs, path::PathBuf};
 
 fn create_files(path: PathBuf, name: &String) {
     // components/
-    fs::create_dir_all(path.join(format!("{}/components/", name))).expect("Creating the components directory failed.");
+    fs::create_dir_all(path.join(format!("{}/components/", name)))
+        .expect("Creating the components directory failed.");
     // .tsx
-    fs::write(path.join(format!("{}/page.tsx", name)), "// page.tsx\n// Ojos Project\n//\n// Enter a description of this page here!\n").expect("Failed to write .tsx file.");
+    fs::write(
+        path.join(format!("{}/page.tsx", name)),
+        "// page.tsx\n// Ojos Project\n//\n// Enter a description of this page here!\n",
+    )
+    .expect("Failed to write .tsx file.");
     // .module.css
-    fs::write(path.join(format!("{}/page.module.css", name)), "/*\npage.module.css\nOjos Project\n\nEnter a description of this page here!\n*/\n").expect("Failed to write .module.css file.");
+    fs::write(
+        path.join(format!("{}/page.module.css", name)),
+        "/*\npage.module.css\nOjos Project\n\nEnter a description of this page here!\n*/\n",
+    )
+    .expect("Failed to write .module.css file.");
 }
 
 pub fn create_page(page_name: Option<String>, dir: String, y: bool) {
     let mut path = env::current_dir().expect("Current directory could not be found.");
     let name: String;
-    
+
     if dir == "src/app/" {
         path = path.join(dir);
 
         match page_name {
-            Some(f) => {name = f},
-            None => {name = input("Set a name for the page:")}
+            Some(f) => name = f,
+            None => name = input("Set a name for the page:"),
         }
-        
     } else {
         // dir was specified
         path = path.join(dir);
 
         match page_name {
-            Some(f) => {name = f},
-            None => {name = ".".to_string()}
+            Some(f) => name = f,
+            None => name = ".".to_string(),
         }
     }
 
@@ -41,9 +49,9 @@ pub fn create_page(page_name: Option<String>, dir: String, y: bool) {
             println!("- {:?}", path.join(format!("{name}/page{extension}")));
         }
         println!("- {:?}", path.join(format!("{name}/components/")));
-    
+
         let yes_no = input("\n\nDoes this look right? (y/N)");
-    
+
         if yes_no.eq_ignore_ascii_case("y") {
             create_files(path, &name);
             println!("Created!")
