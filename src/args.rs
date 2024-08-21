@@ -1,3 +1,4 @@
+use crate::docs::args::DocsCommand;
 use crate::frontend::args::FrontendCommand;
 use crate::newsletter::args::NewsletterCommand;
 use clap::{Parser, Subcommand};
@@ -16,4 +17,7 @@ pub enum CategoryType {
 
     /// Manages the configuration and publication of our email newsletter.
     Newsletter(NewsletterCommand),
+
+    /// Assists in documentation-based tasks.
+    Docs(DocsCommand),
 }

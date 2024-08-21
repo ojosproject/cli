@@ -3,6 +3,7 @@
 //
 // Creates a new page for the frontend developers.
 mod args;
+mod docs;
 mod frontend;
 mod newsletter;
 mod utils;
@@ -32,5 +33,6 @@ fn main() {
                 newsletter_utils::batch_send(publish.newsletter);
             }
         },
+        _ => {}
     }
 }
