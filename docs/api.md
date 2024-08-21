@@ -11,6 +11,8 @@
   - [`ojos newsletter`](#ojos-newsletter)
     - [`ojos newsletter config`](#ojos-newsletter-config)
     - [`ojos newsletter publish <NEWSLETTER>`](#ojos-newsletter-publish-newsletter)
+  - [`ojos docs`](#ojos-docs)
+    - [`ojos docs copy`](#ojos-docs-copy)
 
 ## Introduction
 
@@ -59,3 +61,17 @@ Arguments:
 | Argument       | Description                                                                                        |
 | -------------- | -------------------------------------------------------------------------------------------------- |
 | `<NEWSLETTER>` | The newsletter to publish. For Ojos, we use `newsletter`, `newsletter-es`, or `newsletter-testing` |
+
+## `ojos docs`
+
+### `ojos docs copy`
+
+Introduced in v1.3.0.
+
+Copy a /docs/ folder to the current directory from another. Useful for
+publishing docs on the website.
+
+| Option                | Description                          |
+| --------------------- | ------------------------------------ |
+| `-i, --input <INPUT>` | The path to search for `/docs/`      |
+| `-r, --readme`        | Include the README at `../README.md` |
