@@ -9,12 +9,12 @@ pub struct DocsCommand {
 #[derive(Debug, Subcommand)]
 pub enum DocsSubcommand {
     /// Copy a /docs/ folder to the current directory from another. Useful for publishing docs on the website.
-    Move(Move),
+    Copy(Copy),
 }
 
 #[derive(Debug, Args)]
-pub struct Move {
+pub struct Copy {
     /// The path to search for /docs/.
     #[arg(short, long)]
-    pub path: String,
+    pub input: String,
 }

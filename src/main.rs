@@ -9,6 +9,8 @@ mod newsletter;
 mod utils;
 use args::{CategoryType, Cli};
 use clap::Parser;
+use docs::args::DocsSubcommand;
+use docs::main as docs_utils;
 use frontend::main as frontend_utils;
 use newsletter::{args::NewsletterSubcommand, main as newsletter_utils};
 
@@ -33,6 +35,8 @@ fn main() {
                 newsletter_utils::batch_send(publish.newsletter);
             }
         },
-        _ => {}
+        CategoryType::Docs(docs) => match docs.command {
+            DocsSubcommand::Copy(move_docs) => docs_utils::run(move_docs.input),
+        },
     }
 }
