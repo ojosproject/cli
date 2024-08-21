@@ -29,18 +29,28 @@ pub fn copy(path: PathBuf) {
 
         let new_path = cwd.join(path.file_name().unwrap().to_str().unwrap());
 
-        if !new_path.parent().unwrap().exists() {
-            fs::create_dir_all(&new_path).unwrap();
-        }
-
         fs::write(new_path, content).unwrap();
         println!("Copied {:?}", path);
     }
 }
 
 /// A recursive function to copy files to a path.
-pub fn run(path: String) {
+pub fn run(path: String, include_readme: bool) {
     let p = Path::new(&path);
+
+    if include_readme {
+        let parent = p.parent().unwrap();
+        if parent.join("README.md").exists() {
+            println!("Given {:?}", p.parent().unwrap().join("README.md"));
+            let cwd = env::current_dir().unwrap();
+            let content = fs::read_to_string(p.parent().unwrap().join("README.md")).unwrap();
+
+            println!("Copied {:?}", p.parent().unwrap().join("README.md"));
+            fs::write(cwd.join("README.md"), content).unwrap();
+        } else {
+            println!("Could not find file: {:?}", parent.join("README.md"));
+        }
+    }
 
     copy(p.to_path_buf());
 }

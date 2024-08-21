@@ -36,7 +36,7 @@ fn main() {
             }
         },
         CategoryType::Docs(docs) => match docs.command {
-            DocsSubcommand::Copy(move_docs) => docs_utils::run(move_docs.input),
+            DocsSubcommand::Copy(move_docs) => docs_utils::run(move_docs.input, move_docs.readme),
         },
     }
 }

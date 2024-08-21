@@ -17,4 +17,8 @@ pub struct Copy {
     /// The path to search for /docs/.
     #[arg(short, long)]
     pub input: String,
+
+    /// Include the README at ../
+    #[arg(short, long)]
+    pub readme: bool,
 }
